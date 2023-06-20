@@ -1,5 +1,11 @@
 function updateDOM(time) {
-  console.log(time);
+  const timeEl = document.getElementById('time');
+  const weekdayEl = document.getElementById('weekday');
+  const dateEl = document.getElementById('date');
+
+  timeEl.textContent = `${time.hour}:${time.min}:${time.sec}`;
+  weekdayEl.textContent = time.weekdayString;
+  dateEl.textContent = `${time.day}/${time.month}/${time.year}`;
 }
 
 function getTime() {
@@ -8,11 +14,15 @@ function getTime() {
     hour: now.getHours(),
     min: now.getMinutes(),
     sec: now.getSeconds(),
+    day: now.getDate(),
     weekday: now.getDay(),
     month: now.getMonth(),
     year: now.getFullYear(),
     weekdayString: '',
   };
+
+  time.min = time.min < 10 ? `0${time.min}` : time.min;
+  time.sec = time.sec < 10 ? `0${time.sec}` : time.sec;
 
   switch (time.weekday) {
     case 0:
